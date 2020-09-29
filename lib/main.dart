@@ -3,11 +3,17 @@ import 'package:provider/provider.dart';
 
 void main() => runApp(MyApp());
 
+//  NOTE all are stateLESS widgets below.
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    // Data is the changable method below
+    // you need the CHANGENOTIFIERPROVIDER AND the NOTIFYLISTENERS to make it work
     return ChangeNotifierProvider<Data>(
-      builder: (context) => Data(),
+      // create: (context) => Data(),
+      create: (context) {
+        return Data();
+      },
       child: MaterialApp(
         home: Scaffold(
           appBar: AppBar(
@@ -51,6 +57,8 @@ class Level3 extends StatelessWidget {
 class MyText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    // listen: false means that it only updates on the start of the program and
+    // not the changes
     return Text(Provider.of<Data>(context, listen: false).data);
   }
 }
